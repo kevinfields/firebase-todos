@@ -38,10 +38,11 @@ const NewListForm = (props) => {
   }
 
   return (
-    <div>
-      <form>
-        <input type='text' value={formValues.title} onChange={(e) => setFormValues({...formValues, title: e.target.value})} />
-        <button onClick={submitList}>Submit List</button>
+    <div className='new-list-form'>
+      <form className='list-title-box'>
+        <label htmlFor='list-title-input'>List Title: </label>
+        <input id='list-title-input' type='text' value={formValues.title} onChange={(e) => setFormValues({...formValues, title: e.target.value})} />
+        <button id='submit-list-button' onClick={submitList}>Submit List</button>
       </form>
       <NewListItem appendItem={appendItem} />
     </div>

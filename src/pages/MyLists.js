@@ -1,5 +1,6 @@
 import React from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore';
+import SavedListItem from '../components/SavedListItem';
 
 const MyLists = (props) => {
 
@@ -12,16 +13,17 @@ const MyLists = (props) => {
     <div>
       <p>My Lists: </p>
       <p>{props.user}</p>
-      <section>
+      <section className='user-lists-main'>
         {lists && lists.map((list) => 
-          <section>
+          <section className='user-list-full'>
             <h3>{list.title}</h3>
             {list.items.map((item) => 
-              <>
-              <p>Task: {item.task}</p>
-              <p>Importance: {item.importance}</p>
-              <p>Description: {item.description}</p>
-              </>
+              <SavedListItem 
+              key={list.items.indexOf(item)}
+              task={item.task} 
+              importance={item.importance}
+              description={item.description}
+              />
             )}
           </section>
         )}

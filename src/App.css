@@ -43,7 +43,6 @@
   position: absolute;
   left: 20vw;
   top: 20vh;
-  border: 1px solid black;
 }
 
 .user-home-nav {
@@ -62,4 +61,64 @@
   background-color: red;
   position: relative;
   top: -2vh;
+}
+
+.new-list-item {
+  text-align: left;
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5vh;
+  padding: 0.5vw;
+  width: 40vw;
+  position: relative;
+  left: 7vw;
+}
+
+.new-list-form {
+  
+}
+
+.list-title-box {
+  margin-bottom: 1vh;
+  margin-left: 1vw;
+}
+
+#list-title-input {
+
+}
+
+#submit-list-button {
+  position: fixed;
+  width: 10vw;
+  left: 45vw;
+  top: 75vh;
+  height: 5vh;
+}
+
+#add-item-button {
+  width: 10vw;
+  position: relative;
+  left: 14vw;
+}
+
+.user-lists {
+  display: flex;
+  flex-direction: column;
+}
+
+.user-list-full {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid black;
+  flex-wrap: wrap;
+  height: 70vh;
+  
+}
+
+.saved-list-item {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  border: 1px solid black;
 }
