@@ -122,3 +122,27 @@
   width: 20vw;
   border: 1px solid black;
 }
+
+.current-list {
+  width: 30vw;
+  position: absolute;
+  right: 40vw;
+  top: 20vh;
+}
+
+.current-item-details {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  border: 1px solid black;
+  
+}
+
+.current-list-title {
+  border: 1px solid black;
+  width: 10vw;
+}
+
+.current-list-identifier {
+  width: 10vw;
+}
