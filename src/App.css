@@ -112,7 +112,10 @@
   flex-direction: column;
   border: 1px solid black;
   flex-wrap: wrap;
-  height: 70vh;
+  min-height: 70vh;
+  max-height: 100vh;
+  align-items: flex-start;
+  padding: 0.5vw;
   
 }
 
@@ -121,6 +124,7 @@
   flex-direction: column;
   width: 20vw;
   border: 1px solid black;
+  text-align: left;
 }
 
 .current-list {
@@ -128,6 +132,7 @@
   position: absolute;
   right: 40vw;
   top: 20vh;
+  text-align: left;
 }
 
 .current-item-details {
@@ -135,11 +140,9 @@
   flex-direction: column;
   width: 20vw;
   border: 1px solid black;
-  
 }
 
 .current-list-title {
-  border: 1px solid black;
   width: 10vw;
 }
 

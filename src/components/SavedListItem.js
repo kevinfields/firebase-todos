@@ -6,6 +6,7 @@ const SavedListItem = (props) => {
       <p>Task: {props.task}</p>
       <p>Importance: {props.importance}</p>
       <p>Description: {props.description}</p>
+      <p onClick={props.onComplete}>Completed: {props.completed}</p>
     </div>
   )
 }

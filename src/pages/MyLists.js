@@ -5,9 +5,35 @@ import SavedListItem from '../components/SavedListItem';
 const MyLists = (props) => {
 
   const listsRef = props.firestore.collection('users').doc(props.user).collection('lists');
-  const query = listsRef.orderBy('title');
+  const query = listsRef.orderBy('createdAt');
   const [lists] = useCollectionData(query, {idField: 'id'});
 
+  const markComplete = async (list, index) => {
+
+    const ref = listsRef.doc(list);
+    let data;
+    await ref.get().then((doc) => {
+      if (doc.exists) {
+        data = doc.data()
+        console.log('data: ' + JSON.stringify(data))
+      } else {
+        console.log('nah')
+      }
+    })
+
+    let oldItems = [...data.items];
+    oldItems[index] = {
+      ...oldItems[index],
+      completed: true,
+    }
+  
+    await ref.set({
+      title: data.title,
+      items: [...oldItems],
+      createdAt: data.createdAt,
+    });
+    
+  }
   
   return (
     <div>
@@ -23,6 +49,8 @@ const MyLists = (props) => {
               task={item.task} 
               importance={item.importance}
               description={item.description}
+              completed={item.completed ? 'True' : 'False'}
+              onComplete={() => markComplete(list.id, list.items.indexOf(item))}
               />
             )}
           </section>

@@ -5,7 +5,8 @@ const NewListItem = (props) => {
   const [item, setItem] = useState({
     task: '',
     importance: 0,
-    description: ''
+    description: '',
+    completed: false,
   })
 
   const append = (e) => {
@@ -13,7 +14,8 @@ const NewListItem = (props) => {
     setItem({
       task: '',
       importance: 0,
-      description: ''
+      description: '',
+      completed: false,
     })
   }
   return (
