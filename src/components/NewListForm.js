@@ -32,8 +32,10 @@ const NewListForm = (props) => {
 
   const amendFormValues = (item, property, edit) => {
 
-    if (property === 'importance' && isNaN(edit)) {
-      alert('Importance must be a number');
+    if (property === 'importance') {
+      if (isNaN(edit) || edit < 1 || edit > 10) {
+        alert('Importance must be a number 1-10');
+      }
       return;
     } 
 

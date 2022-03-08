@@ -10,6 +10,12 @@ const NewListItem = (props) => {
   })
 
   const append = (e) => {
+
+    e.preventDefault();
+    if (isNaN(item.importance) || item.importance < 1 || item.importance > 10) {
+      alert('Importance must be a number 1-10');
+      return;
+    }
     props.appendItem(e, item);
     setItem({
       task: '',

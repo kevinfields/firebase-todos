@@ -85,8 +85,8 @@ const MyLists = (props) => {
         break;
       case 'importance':
         const newImportance = prompt('Importance: ', data.items[index].importance);
-        if (isNaN(newImportance)) {
-          alert('Importance must be a number');
+        if (isNaN(newImportance) || newImportance < 1 || newImportance > 10) {
+          alert('Importance must be a number 1-10');
           return;
         }
         oldItems[index] = {
