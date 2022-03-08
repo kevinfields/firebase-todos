@@ -42,6 +42,75 @@ const MyLists = (props) => {
     });
     
   }
+
+  const changeTitle = async (id) => {
+
+    const ref = listsRef.doc(id);
+    let data;
+    await ref.get().then((doc) => {
+      data = doc.data();
+    });
+
+    const newTitle = prompt('New Title: ', data.title);
+
+    await ref.set({
+      title: newTitle,
+      items: [...data.items],
+      createdAt: data.createdAt
+    })
+
+  }
+
+  const editItem = async (property, listId, index) => {
+
+    const ref = listsRef.doc(listId);
+    let data;
+    await ref.get().then((doc) => {
+      if (doc.exists) {
+        data = doc.data();
+      } else {
+        console.log('doc does not exist');
+      }
+    })
+
+    let oldItems = [...data.items];
+
+    switch (property) {
+      case 'task':
+        const newTask = prompt('Task Name: ', data.items[index].task);
+        oldItems[index] = {
+          ...oldItems[index],
+          task: newTask,
+        }
+        break;
+      case 'importance':
+        const newImportance = prompt('Importance: ', data.items[index].importance);
+        if (isNaN(newImportance)) {
+          alert('Importance must be a number');
+          return;
+        }
+        oldItems[index] = {
+          ...oldItems[index],
+          importance: newImportance,
+        }
+        break;
+      case 'description':
+        const newDescription = prompt('Description: ', data.items[index].description);
+        oldItems[index] = {
+          ...oldItems[index],
+          description: newDescription,
+        }
+        break;
+      default:
+        break;
+    }
+
+    await ref.set({
+      title: data.title,
+      items: [...oldItems],
+      createdAt: data.createdAt,
+    });
+  }
   
   return (
     <div>
@@ -51,6 +120,7 @@ const MyLists = (props) => {
         {lists && lists.map((list) => 
           <section className='user-list-full' key={list.id}>
             <h3>{list.title}</h3>
+            <button onClick={() => changeTitle(list.id)}>Change Title</button>
             {list.items.map((item) => 
               <SavedListItem 
               key={list.items.indexOf(item)}
@@ -59,6 +129,7 @@ const MyLists = (props) => {
               description={item.description}
               completed={item.completed ? 'True' : 'False'}
               onComplete={() => markComplete(list.id, list.items.indexOf(item))}
+              onEdit={(property) => editItem(property, list.id, list.items.indexOf(item))}
               />
             )}
           </section>

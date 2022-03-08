@@ -39,16 +39,16 @@
 
 .main-screen {
   height: 60vh;
-  width: 60vw;
+  width: 80vw;
   position: absolute;
-  left: 20vw;
+  left: 10vw;
   top: 20vh;
 }
 
 .user-home-nav {
-  width: 54vw;
+  width: 60vw;
   position: relative;
-  left: 3vw;
+  left: 10vw;
   border: 1px solid blue;
   background-color: skyblue;
   height: 10vh;
@@ -105,6 +105,7 @@
 .user-lists {
   display: flex;
   flex-direction: column;
+  
 }
 
 .user-list-full {
@@ -114,17 +115,28 @@
   flex-wrap: wrap;
   min-height: 70vh;
   max-height: 100vh;
+  width: 70vw;
   align-items: flex-start;
   padding: 0.5vw;
   
 }
 
-.saved-list-item {
+.list-item-inc {
   display: flex;
   flex-direction: column;
   width: 20vw;
-  border: 1px solid black;
+  border: 2px solid red;
   text-align: left;
+  padding: 0.5vw;
+}
+
+.list-item-com {
+  display: flex;
+  flex-direction: column;
+  width: 20vw;
+  border: 2px solid green;
+  text-align: left;
+  padding: 0.5vw;
 }
 
 .current-list {
@@ -148,4 +160,22 @@
 
 .current-list-identifier {
   width: 10vw;
+}
+
+.mark-complete-button {
+  position: relative;
+  bottom: 1vw;
+  left: 1vw;
+  width: 4.5vw;
+  height: 3vh;
+  font-size: 8pt;
+}
+
+.mark-incomplete-button {
+  position: relative;
+  bottom: 1vw;
+  left: 6vw;
+  width: 4.5vw;
+  height: 3vh;
+  font-size: 8pt;
 }
