@@ -6,9 +6,7 @@ const CurrentList = (props) => {
 
    const edit = prompt(`Edit ${detail}: `);
    props.onEdit(index, detail, edit);
-
   }
-
 
   return (
     <div className='current-list'>

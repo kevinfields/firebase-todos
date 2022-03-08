@@ -5,7 +5,7 @@ import 'firebase/firestore';
 import 'firebase/auth';
 
 import {useAuthState} from 'react-firebase-hooks/auth';
-import {useCollectionData} from 'react-firebase-hooks/firestore';
+// import {useCollectionData} from 'react-firebase-hooks/firestore';
 
 import SignIn from './pages/SignIn';
 import UserHome from './pages/UserHome';
@@ -25,7 +25,6 @@ const firestore = firebase.firestore();
 function App() {
 
   const [user] = useAuthState(auth);
-  console.log('user info: ' + JSON.stringify(user));
 
   return (
     <div className="App">

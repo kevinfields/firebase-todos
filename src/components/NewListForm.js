@@ -1,14 +1,13 @@
 import React, {useState} from 'react'
-import { useCollectionData } from 'react-firebase-hooks/firestore';
+// import { useCollectionData } from 'react-firebase-hooks/firestore';
 import NewListItem from './NewListItem';
 import CurrentList from './CurrentList';
-import firebase from 'firebase';
 
 const NewListForm = (props) => {
 
   const listsRef = props.firestore.collection('users').doc(props.user).collection('lists');
-  const query = listsRef.orderBy('id');
-  const [lists] = useCollectionData(query, {idField: 'id'});
+  // const query = listsRef.orderBy('id');
+  // const [lists] = useCollectionData(query, {idField: 'id'});
   
 
   const [formValues, setFormValues] = useState({
@@ -72,9 +71,6 @@ const NewListForm = (props) => {
       default: 
         break;
     }
-
-    console.log('screenshot: ' + JSON.stringify(screenshot));
-    console.log('newItem: ' + JSON.stringify(newItem));
     setFormValues({
       ...formValues,
       items: [...screenshot, newItem]
