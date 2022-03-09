@@ -86,6 +86,7 @@ const NewListForm = (props) => {
       title: formValues.title,
       items: formValues.items,
       createdAt: new Date(),
+      editedAt: '',
       completed: false,
     }).then(() => {
       setFormValues({

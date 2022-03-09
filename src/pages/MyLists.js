@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import SavedListItem from '../components/SavedListItem';
 import SuccessMessage from '../components/SuccessMessage';
+import timeToDate from '../functions/timeToDate';
 
 const MyLists = (props) => {
 
@@ -49,6 +50,7 @@ const MyLists = (props) => {
       title: data.title,
       items: [...oldItems],
       createdAt: data.createdAt,
+      lastEditedAt: data.lastEditedAt,
     });
     
   }
@@ -70,7 +72,8 @@ const MyLists = (props) => {
     await ref.set({
       title: newTitle,
       items: [...data.items],
-      createdAt: data.createdAt
+      createdAt: data.createdAt,
+      lastEditedAt: new Date(),
     })
 
   }
@@ -131,6 +134,7 @@ const MyLists = (props) => {
       title: data.title,
       items: [...oldItems],
       createdAt: data.createdAt,
+      lastEditedAt: new Date(),
     });
   }
 
@@ -167,9 +171,11 @@ const MyLists = (props) => {
         description: newDescription,
         completed: false
       }),
-      createdAt: data.createdAt
+      createdAt: data.createdAt,
+      lastEditedAt: new Date(),
     })
   }
+  
   
   return (
     <div>
@@ -181,6 +187,7 @@ const MyLists = (props) => {
           <div>
             <div className='list-header'>
               <h2>{list.title}</h2>
+              <h5 className='list-created-at'>{timeToDate(list.createdAt.seconds)}</h5>
               <button className='change-title-button' onClick={() => changeTitle(list.id)}>Change Title</button>
               <button className='delete-list-button' onClick={() => deleteList(list.id)}>Delete List</button>
               <button className='add-item-button' onClick={() => postItem(list.id)}>Add Item</button>  

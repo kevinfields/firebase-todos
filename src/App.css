@@ -120,15 +120,17 @@
 
 .list-header {
   height: 10vh;
-  width: 40vw;
+  width: 80vw;
   text-align: center;
   gap: 1vw;
+  position: relative;
+  right: 10vw;
 }
 
 .change-title-button {
   background: transparent;
   position: relative;
-  bottom: 4vh;
+  bottom: 10.5vh;
   border-radius: 3px;
   height: 4vh;
 }
@@ -136,7 +138,7 @@
 .delete-list-button {
   background: transparent;
   position: relative;
-  bottom: 4vh;
+  bottom: 10.5vh;
   margin: 1vw;
   border-radius: 3px;
   height: 4vh;
@@ -145,9 +147,14 @@
 .add-item-button {
   background: transparent;
   position: relative;
-  bottom: 4vh;
+  bottom: 10.5vh;
   border-radius: 3px;
   height: 4vh;
+}
+
+.list-created-at {
+  position: relative;
+  right: 20vw;
 }
 
 
