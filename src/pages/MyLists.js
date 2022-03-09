@@ -1,12 +1,22 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import { useCollectionData } from 'react-firebase-hooks/firestore';
 import SavedListItem from '../components/SavedListItem';
+import SuccessMessage from '../components/SuccessMessage';
 
 const MyLists = (props) => {
 
   const listsRef = props.firestore.collection('users').doc(props.user).collection('lists');
   const query = listsRef.orderBy('createdAt', 'desc');
   const [lists] = useCollectionData(query, {idField: 'id'});
+  const [success, setSuccess] = useState(false);
+
+  useEffect(() => {
+    if (success) {
+      setTimeout(() => {
+       setSuccess(false); 
+      }, 2000)
+    }
+  }, [success])
 
   const markComplete = async (list, index) => {
 
@@ -53,6 +63,10 @@ const MyLists = (props) => {
 
     const newTitle = prompt('New Title: ', data.title);
 
+    if (newTitle === null) {
+      return;
+    }
+
     await ref.set({
       title: newTitle,
       items: [...data.items],
@@ -78,9 +92,13 @@ const MyLists = (props) => {
     switch (property) {
       case 'task':
         const newTask = prompt('Task Name: ', data.items[index].task);
-        oldItems[index] = {
-          ...oldItems[index],
-          task: newTask,
+        if (newTask != null) {
+          oldItems[index] = {
+            ...oldItems[index],
+            task: newTask,
+          }
+        } else {
+          break;
         }
         break;
       case 'importance':
@@ -96,9 +114,13 @@ const MyLists = (props) => {
         break;
       case 'description':
         const newDescription = prompt('Description: ', data.items[index].description);
-        oldItems[index] = {
-          ...oldItems[index],
-          description: newDescription,
+          if (newDescription != null) {
+            oldItems[index] = {
+            ...oldItems[index],
+            description: newDescription,
+          }
+        } else {
+          break;
         }
         break;
       default:
@@ -111,16 +133,59 @@ const MyLists = (props) => {
       createdAt: data.createdAt,
     });
   }
+
+  const deleteList = async (listId) => {
+
+    const ref = listsRef.doc(listId);
+
+    if (window.confirm("Are you sure you want to delete this list?")) {
+      await ref.delete().then(() => {
+        setSuccess(true);
+      })
+    } else {
+      return;
+    }
+
+  }
+
+  const postItem = async (listId) => {
+    const ref = listsRef.doc(listId);
+
+    let data;
+    await ref.get().then((doc) => {
+      data = doc.data();
+    })
+    const newTask = prompt('Task Name: ');
+    const newImportance = prompt('Importance Level: ');
+    const newDescription = prompt('Description: ');
+
+    await ref.set({
+      title: data.title,
+      items: data.items.concat({
+        task: newTask,
+        importance: newImportance,
+        description: newDescription,
+        completed: false
+      }),
+      createdAt: data.createdAt
+    })
+  }
   
   return (
     <div>
-      <p>My Lists: </p>
-      <p>{props.user}</p>
+      {success ? <SuccessMessage /> : null}
+      <p>My Lists </p>
+      <p>User ID: {props.user}</p>
       <section className='user-lists-main'>
         {lists && lists.map((list) => 
+          <div>
+            <div className='list-header'>
+              <h2>{list.title}</h2>
+              <button className='change-title-button' onClick={() => changeTitle(list.id)}>Change Title</button>
+              <button className='delete-list-button' onClick={() => deleteList(list.id)}>Delete List</button>
+              <button className='add-item-button' onClick={() => postItem(list.id)}>Add Item</button>  
+            </div>
           <section className='user-list-full' key={list.id}>
-            <h3>{list.title}</h3>
-            <button onClick={() => changeTitle(list.id)}>Change Title</button>
             {list.items.map((item) => 
               <SavedListItem 
               key={list.items.indexOf(item)}
@@ -133,6 +198,7 @@ const MyLists = (props) => {
               />
             )}
           </section>
+          </div>
         )}
       </section>
     </div>

@@ -33,7 +33,7 @@ const NewListItem = (props) => {
         <label htmlFor='importance-input'>Importance: </label>
         <input id='importance-input' type='number' value={item.importance} onChange={(e) => setItem({...item, importance: e.target.value})} />
         <label htmlFor='description-input'>Description: </label>
-        <input id='description-input' type='text' value={item.description} onChange={(e) => setItem({...item, description: e.target.value})} />
+        <textarea id='description-input' rows='4' value={item.description} onChange={(e) => setItem({...item, description: e.target.value})} />
         <button id='add-item-button' onClick={(e) => append(e)}>Add Item</button>
         </div>
       </form>
