@@ -14,9 +14,9 @@ const CurrentList = (props) => {
       <h3 className='current-list-title'>{props.title}</h3>
       {props.items.map((item) => 
         <div className='current-item-details' key={props.items.indexOf(item)}>
-          <p id='item-task' onClick={() => openEditor('task', props.items.indexOf(item))}>Task: {item.task}</p>
+          <p id='item-task' onClick={() => openEditor('task', props.items.indexOf(item))}>{item.task}</p>
           <p id='item-importance' onClick={() => openEditor('importance', props.items.indexOf(item))}>Importance Level: {item.importance}</p>
-          <p id='item-description' onClick={() => openEditor('description', props.items.indexOf(item))}>Description: {item.description}</p>
+          <p id='item-description' onClick={() => openEditor('description', props.items.indexOf(item))}>{item.description}</p>
         </div>
       )}
     </div>

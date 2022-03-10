@@ -50,7 +50,7 @@ const MyLists = (props) => {
       title: data.title,
       items: [...oldItems],
       createdAt: data.createdAt,
-      lastEditedAt: data.lastEditedAt,
+      lastEditedAt: data.lastEditedAt ? data.lastEditedAt : {seconds: 946706400, nanoseconds: 0},
     });
     
   }
@@ -142,7 +142,7 @@ const MyLists = (props) => {
 
     const ref = listsRef.doc(listId);
 
-    if (window.confirm("Are you sure you want to delete this list?")) {
+    if (window.confirm("Are you sure you want to delete this list? This action cannot be undone.")) {
       await ref.delete().then(() => {
         setSuccess(true);
       })
@@ -160,7 +160,21 @@ const MyLists = (props) => {
       data = doc.data();
     })
     const newTask = prompt('Task Name: ');
-    const newImportance = prompt('Importance Level: ');
+
+    if (newTask === null || newTask === '') {
+      alert('Task name cannot be blank');
+      return;
+    }
+
+    let newImportance = prompt('Importance Level: ');
+
+    if (isNaN(newImportance) || 
+    Number(newImportance) > 10 || 
+    Number(newImportance) < 1 ) {
+      alert('Importance must be a number 1-10');
+      newImportance = 1;
+    }
+
     const newDescription = prompt('Description: ');
 
     await ref.set({
@@ -175,7 +189,33 @@ const MyLists = (props) => {
       lastEditedAt: new Date(),
     })
   }
+
+  const deleteItem = async (listId, itemId) => {
+
+    const ref = listsRef.doc(listId);
+
+    let data;
+
+    await ref.get().then(doc => {
+      data = doc.data();
+    })
+
+    let oldItems = [...data.items];
+    oldItems.splice(itemId, 1);
+
+    if (window.confirm('Are you sure you want to delete this? This action cannot be undone.')) {
+      await ref.set({
+        title: data.title,
+        items: [...oldItems],
+        createdAt: data.createdAt,
+        lastEditedAt: new Date(),
+      })
+    } else {
+      return;
+    }
+  }
   
+    
   
   return (
     <div>
@@ -187,10 +227,13 @@ const MyLists = (props) => {
           <div>
             <div className='list-header'>
               <h2>{list.title}</h2>
-              <h5 className='list-created-at'>{timeToDate(list.createdAt.seconds)}</h5>
+                <div className='times'>
+                  <p className='list-created-at'>Created {timeToDate(list.createdAt.seconds, false)}</p>
+                  <p className='list-edited-at'>{timeToDate(list.lastEditedAt ? list.lastEditedAt.seconds : 946706400, true)}</p>
+                </div>
               <button className='change-title-button' onClick={() => changeTitle(list.id)}>Change Title</button>
               <button className='delete-list-button' onClick={() => deleteList(list.id)}>Delete List</button>
-              <button className='add-item-button' onClick={() => postItem(list.id)}>Add Item</button>  
+              <button className='add-item-button' onClick={() => postItem(list.id)}>Add Item</button>
             </div>
           <section className='user-list-full' key={list.id}>
             {list.items.map((item) => 
@@ -202,6 +245,7 @@ const MyLists = (props) => {
               completed={item.completed ? 'True' : 'False'}
               onComplete={() => markComplete(list.id, list.items.indexOf(item))}
               onEdit={(property) => editItem(property, list.id, list.items.indexOf(item))}
+              onDelete={() => deleteItem(list.id, list.items.indexOf(item))}
               />
             )}
           </section>

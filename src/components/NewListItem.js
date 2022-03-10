@@ -31,7 +31,18 @@ const NewListItem = (props) => {
         <label htmlFor='task-input'>Task: </label>
         <input id='task-input' type='text' value={item.task} onChange={(e) => setItem({...item, task: e.target.value})} />
         <label htmlFor='importance-input'>Importance: </label>
-        <input id='importance-input' type='number' value={item.importance} onChange={(e) => setItem({...item, importance: e.target.value})} />
+        <select id='importance-input' value={item.importance} onChange={(e) => setItem({...item, importance: e.target.value})}>
+          <option value={1}>1</option>
+          <option value={2}>2</option>
+          <option value={3}>3</option>
+          <option value={4}>4</option>
+          <option value={5}>5</option>
+          <option value={6}>6</option>
+          <option value={7}>7</option>
+          <option value={8}>8</option>
+          <option value={9}>9</option>
+          <option value={10}>10</option>
+        </select>
         <label htmlFor='description-input'>Description: </label>
         <textarea id='description-input' rows='4' value={item.description} onChange={(e) => setItem({...item, description: e.target.value})} />
         <button id='add-item-button' onClick={(e) => append(e)}>Add Item</button>

@@ -2,40 +2,6 @@
   text-align: center;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
 
 .main-screen {
   height: 60vh;
@@ -72,7 +38,7 @@
   padding: 0.5vw;
   width: 40vw;
   position: relative;
-  left: 7vw;
+  left: 15vw;
 }
 
 .new-list-form {
@@ -92,14 +58,15 @@
   position: fixed;
   width: 10vw;
   left: 45vw;
-  top: 75vh;
+  top: 80vh;
   height: 5vh;
 }
 
 #add-item-button {
-  width: 10vw;
+  width: 5vw;
+  height: 4vh;
   position: relative;
-  left: 14vw;
+  margin: 0.25vw;
 }
 
 .user-lists-main {
@@ -130,7 +97,7 @@
 .change-title-button {
   background: transparent;
   position: relative;
-  bottom: 10.5vh;
+  bottom: 11.5vh;
   border-radius: 3px;
   height: 4vh;
 }
@@ -138,7 +105,7 @@
 .delete-list-button {
   background: transparent;
   position: relative;
-  bottom: 10.5vh;
+  bottom: 11.5vh;
   margin: 1vw;
   border-radius: 3px;
   height: 4vh;
@@ -147,16 +114,26 @@
 .add-item-button {
   background: transparent;
   position: relative;
-  bottom: 10.5vh;
+  bottom: 11.5vh;
   border-radius: 3px;
   height: 4vh;
 }
 
 .list-created-at {
   position: relative;
-  right: 20vw;
+  left: 12vw;
+  bottom: 2.5vh;
+  font-size: small;
+  text-align: left;
 }
 
+.list-edited-at {
+  position: relative;
+  left: 12vw;
+  bottom: 3vh;
+  font-size: small;
+  text-align: left;
+}
 
 .list-item-inc {
   display: flex;
@@ -172,7 +149,6 @@
   margin-top: 0.5vw;
   margin-left: 0.5vw;
   font-family: Arial, Helvetica, sans-serif;
-  flex-grow: 2;
 }
 
 .list-item-com {
@@ -189,11 +165,11 @@
   margin-top: 0.5vw;
   margin-left: 0.5vw;
   font-family: Arial, Helvetica, sans-serif;
-  flex-grow: 2;
 }
 
 #sl-task {
   text-align: center;
+  margin: 0px;
 }
 
 #sl-imp {
@@ -212,7 +188,7 @@
 .current-list {
   width: 30vw;
   position: absolute;
-  right: 45vw;
+  right: 37vw;
   top: 20vh;
   text-align: left;
 }
@@ -222,6 +198,11 @@
   flex-direction: column;
   width: 20vw;
   border: 1px solid black;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px black;
+  position: relative;
+  right: 7vw;
+  margin-bottom: 2vh;
 }
 
 .current-list-title {
@@ -232,9 +213,45 @@
   width: 10vw;
 }
 
-#description-input {
-  
+#task-input {
+  font-size: 16pt;
+  height: 2rem;
+}
 
+#importance-input {
+  width: 5vw;
+}
+
+#description-input {
+  font-family: Arial, Helvetica, sans-serif;
+
+}
+
+#item-task {
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  margin-bottom: 1vh;
+}
+
+#item-importance {
+  margin-left: 1vw;
+}
+
+#item-description {
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+
+.delete-item-button {
+  position: relative;
+  width: 2vw;
+  height: 3vh;
+  left: 18vw;
+  color: black;
+  background-color: transparent;
+  text-align: center;
 }
 
 .mark-complete-button {

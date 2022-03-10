@@ -3,6 +3,7 @@ import React from 'react'
 const SavedListItem = (props) => {
   return (
     <div className={props.completed === 'True' ? 'list-item-com' : 'list-item-inc'}>
+      <button className='delete-item-button' onClick={props.onDelete}>X</button>
       <h2 id='sl-task' onClick={() => props.onEdit('task')}>{props.task}</h2>
       <p id='sl-imp' onClick={() => props.onEdit('importance')}>Importance Level: {props.importance}</p>
       <p id='sl-desc' onClick={() => props.onEdit('description')}>{props.description}</p>
