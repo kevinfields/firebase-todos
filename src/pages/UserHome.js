@@ -3,7 +3,7 @@ import Navbar from '../components/Navbar'
 
 const UserHome = (props) => {
   return (
-    <div>
+    <div id='user-home'>
       <Navbar user={props.user} firestore={props.firestore}/>
     </div>
   )

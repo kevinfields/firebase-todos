@@ -2,6 +2,32 @@
   text-align: center;
 }
 
+#login-screen {
+  width: 50vw;
+  height: 50vh;
+  position: fixed;
+  left: 25vw;
+  top: 25vh;
+  border: 2px solid black;
+  border-radius: 5px;
+  
+}
+
+#login-message {
+  text-align: center;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 30pt;
+}
+
+#login-button {
+  width: 10vw;
+  height: 10vh;
+  position: fixed;
+  left: 45vw;
+  top: 45vh;
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 12pt;
+}
 
 .main-screen {
   height: 60vh;
@@ -11,22 +37,28 @@
   top: 20vh;
 }
 
+
+
 .user-home-nav {
   width: 60vw;
   position: relative;
   left: 10vw;
   border: 1px solid blue;
   background-color: skyblue;
-  height: 10vh;
+  height: 12vh;
   text-align: center;
   font-size: 15pt;
 }
 
 .nav-links {
   color: white;
-  background-color: red;
   position: relative;
   top: -2vh;
+}
+
+.nav-link {
+  margin-left: 5vw;
+  margin-right: 5vw;
 }
 
 .new-list-item {
@@ -43,7 +75,7 @@
 }
 
 .new-list-form {
-  
+ 
 }
 
 .list-title-box {

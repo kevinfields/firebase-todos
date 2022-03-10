@@ -10,7 +10,11 @@ const SignIn = (props) => {
     props.auth.signInWithPopup(provider);
   }
   return (
-      <button onClick={signInWithGoogle}>Sign in with Google</button>
+    <div id='login-screen'>
+      <h2 id='login-message'>To Do Lists</h2>
+      <button id='login-button' onClick={signInWithGoogle}>Sign in with Google</button>
+    </div>
+      
   )
 }
 
