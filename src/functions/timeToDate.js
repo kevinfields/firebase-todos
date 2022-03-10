@@ -1,5 +1,3 @@
-
-
 const timeToDate = (s, edit) => {
 
   let time = new Date(s * 1000).toLocaleString('en-US', {timeZone:'CST'});

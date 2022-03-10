@@ -36,9 +36,10 @@
   flex-direction: column;
   gap: 0.5vh;
   padding: 0.5vw;
-  width: 40vw;
-  position: relative;
-  left: 15vw;
+  width: 30vw;
+  position: fixed;
+  left: 35vw;
+  top: 41vh;
 }
 
 .new-list-form {
@@ -51,7 +52,11 @@
 }
 
 #list-title-input {
-
+  position: fixed;
+  width: 15vw;
+  left: 42.5vw;
+  height: 2rem;
+  font-size: 16pt;
 }
 
 #submit-list-button {
@@ -98,8 +103,11 @@
   background: transparent;
   position: relative;
   bottom: 11.5vh;
-  border-radius: 3px;
+  color: blue;
+  border: 3px solid blue;
+  border-radius: 5px;
   height: 4vh;
+  font-weight: bold;
 }
 
 .delete-list-button {
@@ -107,16 +115,22 @@
   position: relative;
   bottom: 11.5vh;
   margin: 1vw;
-  border-radius: 3px;
+  color: red;
+  border: 3px solid red;
+  border-radius: 5px;
   height: 4vh;
+  font-weight: bold;
 }
 
 .add-item-button {
   background: transparent;
   position: relative;
   bottom: 11.5vh;
-  border-radius: 3px;
+  color: green;
+  border: 3px solid green;
+  border-radius: 5px;
   height: 4vh;
+  font-weight: bold;
 }
 
 .list-created-at {

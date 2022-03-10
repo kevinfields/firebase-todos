@@ -4,7 +4,7 @@ const NewListItem = (props) => {
 
   const [item, setItem] = useState({
     task: '',
-    importance: 0,
+    importance: 1,
     description: '',
     completed: false,
   })
@@ -12,6 +12,10 @@ const NewListItem = (props) => {
   const append = (e) => {
 
     e.preventDefault();
+    if (item.task === null || item.task === '') {
+      alert('Please enter a task');
+      return;
+    }
     if (isNaN(item.importance) || item.importance < 1 || item.importance > 10) {
       alert('Importance must be a number 1-10');
       return;
@@ -19,7 +23,7 @@ const NewListItem = (props) => {
     props.appendItem(e, item);
     setItem({
       task: '',
-      importance: 0,
+      importance: 1,
       description: '',
       completed: false,
     })

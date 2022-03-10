@@ -11,7 +11,7 @@ const NewListForm = (props) => {
   
 
   const [formValues, setFormValues] = useState({
-    title: 'List Title',
+    title: '',
     items: []
   });
   
@@ -19,10 +19,6 @@ const NewListForm = (props) => {
   const appendItem = (e, val) => {
 
     e.preventDefault();
-    if (val.task === '') {
-      alert('Please enter a task');
-      return;
-    }
     
     setFormValues({
       ...formValues,
@@ -35,12 +31,11 @@ const NewListForm = (props) => {
     if (property === 'importance') {
       if (isNaN(edit) || edit < 1 || edit > 10) {
         alert('Importance must be a number 1-10');
+        return;
       }
-      return;
     } 
 
     let screenshot = [...formValues.items];
-    console.log('screenshot state 1: ' + JSON.stringify(screenshot));
     
     const oldItem = screenshot.splice(item, 1);
 
@@ -55,9 +50,10 @@ const NewListForm = (props) => {
         }
         break;
       case 'importance':
+        console.log('we got here at least');
         newItem = {
           task: oldItem[0].task,
-          importance: Number(edit),
+          importance: edit,
           description: oldItem[0].description,
           completed: false,
         }
@@ -73,15 +69,21 @@ const NewListForm = (props) => {
       default: 
         break;
     }
+ 
+    screenshot.splice(item, 0, newItem);
     setFormValues({
       ...formValues,
-      items: [...screenshot, newItem]
+      items: [...screenshot],
     })
   }
 
   const submitList = async (e) => {
     e.preventDefault();
 
+    if (formValues.items.length < 1) {
+      alert('You must include at least one item.');
+      return;
+    }
     await listsRef.add({
       title: formValues.title,
       items: formValues.items,
@@ -100,8 +102,7 @@ const NewListForm = (props) => {
     <div className='new-list-form'>
       <CurrentList title={formValues.title} items={formValues.items} onEdit={(item, property, edit) => amendFormValues(item, property, edit)}/>
       <form className='list-title-box'>
-        <label htmlFor='list-title-input'>List Title: </label>
-        <input id='list-title-input' type='text' value={formValues.title} onChange={(e) => setFormValues({...formValues, title: e.target.value})} />
+        <input id='list-title-input' type='text' placeholder={'give your list a title'} value={formValues.title} onChange={(e) => setFormValues({...formValues, title: e.target.value})} />
         <button id='submit-list-button' onClick={submitList}>Submit List</button>
       </form>
       <NewListItem appendItem={appendItem} />
