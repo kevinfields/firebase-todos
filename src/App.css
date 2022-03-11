@@ -46,6 +46,7 @@
   border: 1px solid blue;
   background-color: skyblue;
   height: 12vh;
+  bottom: 10vh;
   text-align: center;
   font-size: 15pt;
 }
@@ -86,6 +87,7 @@
 #list-title-input {
   position: fixed;
   width: 15vw;
+  top: 35vh;
   left: 42.5vw;
   height: 2rem;
   font-size: 16pt;
@@ -93,10 +95,27 @@
 
 #submit-list-button {
   position: fixed;
+  width: 7vw;
+  left: 35vw;
+  top: 35vh;
+  height: 2rem;
+}
+
+#list-sort-select {
+  position: fixed;
+  left: 66vw;
   width: 10vw;
-  left: 45vw;
-  top: 80vh;
-  height: 5vh;
+  top: 35vh;
+  height: 2rem;
+
+}
+
+#select-label {
+  position: fixed;
+  left: 60vw;
+  width: 10vw;
+  top: 36vh;
+  text-align: left;
 }
 
 #add-item-button {
@@ -105,6 +124,8 @@
   position: relative;
   margin: 0.25vw;
 }
+
+
 
 .user-lists-main {
   display: flex;
@@ -251,6 +272,15 @@
   margin-bottom: 2vh;
 }
 
+#remove-item-button {
+  width: 2vw;
+  height: 2vw;
+  text-align: center;
+  background-color: transparent;
+  border-radius: 5px;
+  font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
 .current-list-title {
   width: 10vw;
 }
@@ -258,6 +288,7 @@
 .current-list-identifier {
   width: 10vw;
 }
+
 
 #task-input {
   font-size: 16pt;

@@ -1,15 +1,13 @@
-import React, {useEffect, useState} from 'react'
-// import { useCollectionData } from 'react-firebase-hooks/firestore';
+import React, {useEffect, useState, useRef} from 'react'
 import NewListItem from './NewListItem';
 import CurrentList from './CurrentList';
 import useLocalStorage from '../hooks/useLocalStorage';
+import listSorter from '../functions/listSorter';
 
 const NewListForm = (props) => {
 
   const listsRef = props.firestore.collection('users').doc(props.user).collection('lists');
-  // const query = listsRef.orderBy('id');
-  // const [lists] = useCollectionData(query, {idField: 'id'});
-  
+  const dummy = useRef();
 
   const [formValues, setFormValues] = useState({
     title: '',
@@ -49,6 +47,9 @@ const NewListForm = (props) => {
       ...formValues,
       items: formValues.items.concat(val)
     })
+    dummy.current.scrollIntoView({
+      behavior: 'smooth'
+    });
   }
 
   const amendFormValues = (item, property, edit) => {
@@ -102,6 +103,15 @@ const NewListForm = (props) => {
     })
   }
 
+  const removeItem = (index) => {
+    let screenshot = [...formValues.items];
+    screenshot.splice(index, 1);
+    setFormValues({
+      ...formValues,
+      items: [...screenshot],
+    })
+  }
+
   const submitList = async (e) => {
     e.preventDefault();
 
@@ -125,13 +135,30 @@ const NewListForm = (props) => {
     })
   }
 
+  const sortList = (sort) => {
+    let newList = listSorter(formValues.items, sort);
+    setFormValues({
+      ...formValues,
+      items: [...newList],
+    })
+  }
+
   return (
     <div className='new-list-form'>
-      <CurrentList title={formValues.title} items={formValues.items} onEdit={(item, property, edit) => amendFormValues(item, property, edit)}/>
+      <CurrentList title={formValues.title} items={formValues.items} onEdit={(item, property, edit) => amendFormValues(item, property, edit)} onRemove={(index) => removeItem(index)} dummy={dummy}/>
       <form className='list-title-box'>
         <input id='list-title-input' type='text' placeholder={'give your list a title'} value={formValues.title} onChange={(e) => setFormValues({...formValues, title: e.target.value})} />
         <button id='submit-list-button' onClick={submitList}>Submit List</button>
       </form>
+      <label htmlFor='list-sort-select' id='select-label'>Sort List</label>
+      <select id='list-sort-select' onChange={(e) => sortList(e.target.value)}>
+        <option value='0'>Newest First</option>
+        <option value='1'>Alphabetical</option>
+        <option value='2'>Importance (High to Low)</option>
+        <option value='3'>Oldest First</option>
+        <option value='4'>Reverse Alphabetical</option>
+        <option value='5'>Importance (Low to High)</option>
+      </select>
       <NewListItem appendItem={appendItem} />
     </div>
   )
