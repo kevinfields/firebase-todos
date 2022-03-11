@@ -1,7 +1,8 @@
-import React, {useState} from 'react'
+import React, {useEffect, useState} from 'react'
 // import { useCollectionData } from 'react-firebase-hooks/firestore';
 import NewListItem from './NewListItem';
 import CurrentList from './CurrentList';
+import useLocalStorage from '../hooks/useLocalStorage';
 
 const NewListForm = (props) => {
 
@@ -14,6 +15,30 @@ const NewListForm = (props) => {
     title: '',
     items: []
   });
+
+  const [savedForm, setSavedForm] = useLocalStorage('formValues', {title: '', items: [{task: '', importance: '', description: '', completed: ''}]});
+
+
+  useEffect(() => {
+
+    setSavedForm({
+      ...formValues
+    }); 
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formValues])
+
+  useEffect(() => {
+
+    if (savedForm && savedForm.title !== null) {
+      console.log('we got one saved')
+      setFormValues({
+        title: savedForm.title,
+        items: savedForm.items.length > 0 ? [...savedForm.items] : [],
+      });
+    }
+   
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   
 
   const appendItem = (e, val) => {
@@ -95,6 +120,8 @@ const NewListForm = (props) => {
         title: '',
         items: []
       })
+
+      setSavedForm([])
     })
   }
 
