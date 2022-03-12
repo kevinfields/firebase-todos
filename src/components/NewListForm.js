@@ -42,14 +42,18 @@ const NewListForm = (props) => {
   const appendItem = (e, val) => {
 
     e.preventDefault();
-    
+   
+
     setFormValues({
       ...formValues,
       items: formValues.items.concat(val)
     })
-    dummy.current.scrollIntoView({
-      behavior: 'smooth'
-    });
+
+    if (formValues.items.length > 1) {
+      dummy.current.scrollIntoView({
+        behavior: 'smooth'
+      });
+    }
   }
 
   const amendFormValues = (item, property, edit) => {

@@ -2,7 +2,6 @@ import React from 'react'
 
 const CurrentList = (props) => {
 
- 
   const openEditor = (detail, index) => {
 
    const edit = prompt(`Edit ${detail}: `);
@@ -21,7 +20,7 @@ const CurrentList = (props) => {
             <p id='item-importance' onClick={() => openEditor('importance', props.items.indexOf(item))}>Importance Level: {item.importance}</p>
             <p id='item-description' onClick={() => openEditor('description', props.items.indexOf(item))}>{item.description}</p>
           </div>
-          <div ref={props.dummy}></div>
+          <div ref={props.dummy}></div> 
         </div>
       )}
     </div>
