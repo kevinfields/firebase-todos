@@ -134,8 +134,8 @@ const NewListForm = (props) => {
         title: '',
         items: []
       })
-
-      setSavedForm([])
+    alert('List Saved Successfully!');
+    setSavedForm([]);
     })
   }
 
@@ -163,7 +163,7 @@ const NewListForm = (props) => {
         <option value='4'>Reverse Alphabetical</option>
         <option value='5'>Importance (Low to High)</option>
       </select>
-      <NewListItem appendItem={appendItem} />
+      <NewListItem appendItem={appendItem}/>
     </div>
   )
 }

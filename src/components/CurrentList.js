@@ -13,7 +13,7 @@ const CurrentList = (props) => {
       <h6 className='current-list-identifier'>Current List</h6>
       <h3 className='current-list-title'>{props.title}</h3>
       {props.items.map((item) => 
-        <div>
+        <div key={props.items.indexOf(item)}>
           <div className='current-item-details' key={props.items.indexOf(item)}>
             <button id='remove-item-button' onClick={() => props.onRemove(props.items.indexOf(item))}>X</button>
             <p id='item-task' onClick={() => openEditor('task', props.items.indexOf(item))}>{item.task}</p>

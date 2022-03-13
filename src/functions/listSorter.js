@@ -4,18 +4,23 @@ export default function listSorter(list, type) {
     let titleArray = [];
     let importanceArray = [];
     let sortedArray = [];
+
     //make new arrays of titles, and title importance pairs
 
     for (let i=0; i<list.length; i++) {
         titleArray[i] = list[i].task;
-        importanceArray[i] = list[i].importance + ' ' + list[i].task;
+        // importanceArray[i] = list[i].importance + ' ' + list[i].task;
+        importanceArray[i] = {
+            importance: Number(list[i].importance),
+            task: list[i].task
+        }
     }
 
 
     switch (type) {
         case '0':
             //newest first
-            sortedArray = [...list].reverse();
+            sortedArray = list.sort((a, b) => b.index - a.index).reverse();
             break;
         case '1':
             //alphabetical a-z
@@ -28,11 +33,10 @@ export default function listSorter(list, type) {
             break;
         case '2':
             //importance high to low
-            importanceArray.sort();
+            importanceArray.sort((a, b) => a.importance - b.importance)
             for (let i=0; i<list.length; i++) {
-                let importanceIndex = importanceArray.indexOf((list[i].importance + ' ' + list[i].task));
+                let importanceIndex = importanceArray.findIndex((item) => (item.task === list[i].task) && (Number(item.importance) === Number(list[i].importance)));
                 sortedArray[importanceIndex] = list[i];
-                
             }
             sortedArray = sortedArray.reverse();
             break;
@@ -53,15 +57,13 @@ export default function listSorter(list, type) {
             break;
         case '5':
             //importance low to high
-            importanceArray.sort();
+            importanceArray.sort((a, b) => a.importance - b.importance)
             for (let i=0; i<list.length; i++) {
-                let importanceIndex = importanceArray.indexOf((list[i].importance + ' ' + list[i].task));
+                let importanceIndex = importanceArray.findIndex((item) => (item.task === list[i].task) && (Number(item.importance) === Number(list[i].importance)));
                 sortedArray[importanceIndex] = list[i];
-                
             }
             break;
         default:
-            console.log('tf');
             sortedArray = list;
             break;
     }

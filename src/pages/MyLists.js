@@ -10,6 +10,15 @@ const MyLists = (props) => {
   const query = listsRef.orderBy('createdAt', 'desc');
   const [lists] = useCollectionData(query, {idField: 'id'});
   const [success, setSuccess] = useState(false);
+  const [newItem, setNewItem] = useState({
+    task: '',
+    importance: 1,
+    description: '',
+    open: false,
+    list: '',
+    title: '',
+  });
+
 
   useEffect(() => {
     if (success) {
@@ -152,21 +161,31 @@ const MyLists = (props) => {
 
   }
 
-  const postItem = async (listId) => {
-    const ref = listsRef.doc(listId);
+  const addItem = (listId, title) => {
+    setNewItem({
+      ...newItem,
+      open: true,
+      list: listId,
+      title: title,
+    })
+  }
+
+  const postItem = async () => {
+
+    const ref = listsRef.doc(newItem.list);
 
     let data;
     await ref.get().then((doc) => {
       data = doc.data();
     })
-    const newTask = prompt('Task Name: ');
+    const newTask = newItem.task;
 
     if (newTask === null || newTask === '') {
       alert('Task name cannot be blank');
       return;
     }
 
-    let newImportance = prompt('Importance Level: ');
+    let newImportance = newItem.importance;
 
     if (isNaN(newImportance) || 
     Number(newImportance) > 10 || 
@@ -175,7 +194,7 @@ const MyLists = (props) => {
       newImportance = 1;
     }
 
-    const newDescription = prompt('Description: ');
+    const newDescription = newItem.description;
 
     await ref.set({
       title: data.title,
@@ -188,6 +207,14 @@ const MyLists = (props) => {
       createdAt: data.createdAt,
       lastEditedAt: new Date(),
     })
+
+    setNewItem({
+      task: '',
+      importance: 0,
+      description: '',
+      open: false,
+    });
+
   }
 
   const deleteItem = async (listId, itemId) => {
@@ -222,9 +249,40 @@ const MyLists = (props) => {
       {success ? <SuccessMessage /> : null}
       <p>My Lists </p>
       <p>User ID: {props.user}</p>
+      {newItem.open ?
+      <section className='new-item-screen'>
+        <h3>{newItem.title}</h3>
+        <label htmlFor='new-task-input'>Task Name: </label>
+        <input 
+        type='text' 
+        name='new-task-input'
+        value={newItem.task}
+        onChange={(e) => setNewItem({...newItem, task: e.target.value})} 
+        />
+        <label htmlFor='new-importance-input'>Importance: </label>
+        <input 
+        type='number'
+        min={1}
+        max={10} 
+        id='new-importance-input'
+        name='new-importance-input'
+        value={newItem.importance}
+        onChange={(e) => setNewItem({...newItem, importance: e.target.value})} 
+        />
+        <label htmlFor='new-description-input'>Description: </label>
+        <textarea 
+        name='new-description-input'
+        id='new-description-input'
+        rows={5}
+        value={newItem.description}
+        onChange={(e) => setNewItem({...newItem, description: e.target.value})} 
+        />
+        <button id='add-item-screen-button' onClick={() => postItem()}>Add</button>
+      </section>
+      : null}
       <section className='user-lists-main'>
         {lists && lists.map((list) => 
-          <div>
+          <div key={list.id}>
             <div className='list-header'>
               <h2>{list.title}</h2>
                 <div className='times'>
@@ -233,7 +291,7 @@ const MyLists = (props) => {
                 </div>
               <button className='change-title-button' onClick={() => changeTitle(list.id)}>Change Title</button>
               <button className='delete-list-button' onClick={() => deleteList(list.id)}>Delete List</button>
-              <button className='add-item-button' onClick={() => postItem(list.id)}>Add Item</button>
+              <button className='add-item-button' onClick={() => addItem(list.id, list.title)}>Add Item</button>
             </div>
           <section className='user-list-full' key={list.id}>
             {list.items.map((item) => 
