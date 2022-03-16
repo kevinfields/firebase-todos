@@ -7,6 +7,7 @@ const NewListItem = (props) => {
     importance: 1,
     description: '',
     completed: false,
+    index: 0,
   })
 
   const append = (e) => {
@@ -26,6 +27,7 @@ const NewListItem = (props) => {
       importance: 1,
       description: '',
       completed: false,
+      index: item.index + 1,
     })
   }
   return (

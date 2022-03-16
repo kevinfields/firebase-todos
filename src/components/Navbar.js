@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route, Routes, Link} from 'react-router-dom';
 import CreateList from '../pages/CreateList';
-import HomePage from './HomePage';
+import HomePage from '../pages/HomePage';
 import MyLists from '../pages/MyLists';
 
 const Navbar = (props) => {

@@ -76,7 +76,7 @@ const NewListForm = (props) => {
           task: edit,
           importance: oldItem[0].importance,
           description: oldItem[0].description,
-          completed: false
+          completed: false,
         }
         break;
       case 'importance':
@@ -147,9 +147,19 @@ const NewListForm = (props) => {
     })
   }
 
+  const clearList = () => {
+
+    if (window.confirm('Are you sure you want to delete all items? This cannot be undone.')) {
+      setFormValues({
+        title: '',
+        items: [],
+      })
+    }
+  }
+
   return (
     <div className='new-list-form'>
-      <CurrentList title={formValues.title} items={formValues.items} onEdit={(item, property, edit) => amendFormValues(item, property, edit)} onRemove={(index) => removeItem(index)} dummy={dummy}/>
+      <CurrentList title={formValues.title} items={formValues.items} onEdit={(item, property, edit) => amendFormValues(item, property, edit)} onRemove={(index) => removeItem(index)} dummy={dummy} onClear={() => clearList()}/>
       <form className='list-title-box'>
         <input id='list-title-input' type='text' placeholder={'give your list a title'} value={formValues.title} onChange={(e) => setFormValues({...formValues, title: e.target.value})} />
         <button id='submit-list-button' onClick={submitList}>Submit List</button>

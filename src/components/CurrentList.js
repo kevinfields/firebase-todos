@@ -5,12 +5,16 @@ const CurrentList = (props) => {
   const openEditor = (detail, index) => {
 
    const edit = prompt(`Edit ${detail}: `);
+   if (edit === '' || edit === null) {
+     return;
+   }
    props.onEdit(index, detail, edit);
   }
 
   return (
     <div className='current-list'>
-      <h6 className='current-list-identifier'>Current List</h6>
+      <button onClick={props.onClear} className='clear-list-button'>Clear List</button>
+      <p className='list-identifier'>Click any property of an item to edit it</p>
       <h3 className='current-list-title'>{props.title}</h3>
       {props.items.map((item) => 
         <div key={props.items.indexOf(item)}>

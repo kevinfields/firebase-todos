@@ -1,5 +1,11 @@
 body {
-  background-color: rgb(255, 255, 255);
+  height: 100%;
+  margin: 0;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
+  background-color: white;
 }
 
 
@@ -42,15 +48,33 @@ body {
   top: 20vh;
 }
 
+.no-route-screen {
+  position: relative;
+  top: 10vh;
+}
 
+.nr-user-info {
+  position: relative;
+  top: 5vh;
+  border: 2px solid black;
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px black;
+  text-align: left;
+  padding-left: 1vw;
+  padding-top: 1vh;
+}
 
+#user-info-head {
+  font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  text-align: center;
+}
 .user-home-nav {
   width: 40vw;
   position: relative;
   left: 20vw;
-  border: 1px solid blue;
+  border: 1px solid black;
   border-radius: 15px;
-  background-color: skyblue;
+  background-color: white;
   height: 12vh;
   bottom: 10vh;
   text-align: center;
@@ -70,7 +94,8 @@ body {
 
 .new-list-item {
   text-align: left;
-  border: 1px solid black;
+  border: 3px solid lightslategray;
+  border-radius: 5px;
   display: flex;
   flex-direction: column;
   gap: 0.5vh;
@@ -80,6 +105,7 @@ body {
   left: 35vw;
   top: 41vh;
 }
+
 
 .new-list-form {
  
@@ -105,6 +131,21 @@ body {
   left: 35vw;
   top: 35vh;
   height: 2rem;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px 1px black;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+#submit-list-button:hover {
+  background-color: rgb(186, 193, 199);
+}
+
+#submit-list-button:active {
+  position: fixed;
+  transform: translate(1px, 1px);
+  box-shadow: none;
 }
 
 #list-sort-select {
@@ -129,6 +170,21 @@ body {
   height: 4vh;
   position: relative;
   margin: 0.25vw;
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px 1px black;
+  border-radius: 3px;
+  font-weight: bold;
+}
+
+#add-item-button:hover {
+  background-color: rgb(186, 193, 199);
+}
+
+#add-item-button:active {
+  position: relative;
+  transform: translate(1px, 1px);
+  box-shadow: none;
 }
 
 
@@ -273,11 +329,17 @@ body {
 }
 
 .current-list {
-  width: 30vw;
+  width: 22vw;
+  margin-right: 8vw;
+  padding-left: 1vw;
+  padding-top: 1vh;
   position: absolute;
   right: 37vw;
   top: 20vh;
   text-align: left;
+  border: 3px dotted black;
+  border-radius: 3px;
+
 }
 
 .current-item-details {
@@ -295,22 +357,48 @@ body {
   width: 2vw;
   height: 2vw;
   text-align: center;
+  color: red;
   background-color: transparent;
   border-radius: 5px;
   font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
+.clear-list-button {
+  background-color: white;
+  border: 1px solid black;
+  box-shadow: 1px 1px 1px 1px black;
+  border-radius: 3px;
+  font-weight: bold;
+  height: 4vh;
+  width: 6vw;
+}
+
+.clear-list-button:hover {
+  background-color: rgb(186, 193, 199);
+}
+
+.clear-list-button:active {
+  position: relative;
+  transform: translate(1px, 1px);
+  box-shadow: none;
+}
 .current-list-title {
   max-width: 20vw;
   margin-top: 2vh;
   overflow-wrap: break-word;
 }
 
-.current-list-identifier {
-  width: 10vw;
-  margin: 0px;
-}
 
+
+.list-identifier {
+  position: relative;
+  left: 10vw;
+  bottom: 6vh;
+  font-size: 10pt;
+  font-style: italic;
+  width: 10vw;
+  overflow-wrap: break-word;
+}
 
 #task-input {
   font-size: 16pt;
