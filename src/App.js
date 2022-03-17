@@ -29,7 +29,7 @@ function App() {
   return (
     <div className="App">
       <section className='main-screen'>
-        { user ? <UserHome user={user} firestore={firestore}/> : <SignIn auth={auth}/>}
+        { user ? <UserHome user={user} firestore={firestore} auth={auth}/> : <SignIn auth={auth}/>}
       </section>
     </div>
   );
